@@ -12,7 +12,7 @@ witmotion:
       measurements:
         acceleration:
           enabled: true
-          covariance: [0.00747 0.0 0.0 0.0 0.00545 0.0 0.0 0.0 0.00769]
+          covariance: [0.00747, 0.0, 0.0, 0.0, 0.00545, 0.0, 0.0, 0.0, 0.00769]
         angular_velocity:
           enabled: true
           covariance: [0.0663, 0.0, 0.0, 0.0, 0.1453, 0.0, 0.0, 0.0, 0.0378]
