@@ -6,25 +6,25 @@ witmotion:
     timeout_ms: 10 # ms
     restart_service_name: /restart_imu
     imu_publisher:
-      topic_name: /imu
+      topic_name: /sensors/primary/imu/raw
       frame_id: base_imu_link
       use_native_orientation: false
       measurements:
         acceleration:
           enabled: true
-          covariance: [0.00747, 0.0, 0.0, 0.0, 0.00545, 0.0, 0.0, 0.0, 0.00769]
+          covariance: [0.01425, 0.0, 0.0, 0.0, 0.01139, 0.0, 0.0, 0.0, 0.01189]
         angular_velocity:
           enabled: true
-          covariance: [0.0663, 0.0, 0.0, 0.0, 0.1453, 0.0, 0.0, 0.0, 0.0378]
+          covariance: [1e-09, 0.0, 0.0, 0.0, 1e-09, 0.0, 0.0, 0.0, 1e-09]
         orientation:
           enabled: true
-          covariance: [0.0479, 0.0, 0.0, 0.0, 0.0207, 0.0, 0.0, 0.0, 0.0041]
+          covariance: [0.00317, 0.0, 0.0, 0.0, 0.00312, 0.0, 0.0, 0.0, 0.17256]
     temperature_publisher:
       enabled: true
       topic_name: /temperature
       frame_id: base_link
       from_message: magnetometer # acceleration, angular_vel, orientation, magnetometer
-      variance: 0.11401
+      variance: 0.12181
       coefficient: 1.0 # Linear calibration parameters: coefficient
       addition: 0.0 # and addendum
     magnetometer_publisher:
@@ -34,7 +34,26 @@ witmotion:
       coefficient: 0.00000001 # Linear calibration parameters: coefficient
       addition: 0.0 # and addendum
       covariance:
-        [2.34212, 0.0, 0.0, 0.0, 1.32012, 0.0, 0.0, 0.0, 11.72139]
+        [32.24426, 0.0, 0.0, 0.0, 32.87164, 0.0, 0.0, 0.0, 34.40223]
+    orientation_publisher:
+      enabled: true
+      topic_name: /orientation
+####################################################################
+#
+#        NOT USED BY HWT905
+#
+####################################################################
+    gps_publisher:
+      enabled: false
+      navsat_fix_frame_id: world
+      navsat_fix_topic_name: /gps
+      navsat_altitude_topic_name: /gps_altitude
+      navsat_satellites_topic_name: /gps_satellites
+      navsat_variance_topic_name: /gps_variance
+      ground_speed_topic_name: /gps_ground_speed
+    rtc_publisher:
+      enabled: false
+      topic_name: /witmotion_clock
     barometer_publisher:
       enabled: false
       topic_name: /barometer
@@ -47,17 +66,3 @@ witmotion:
       topic_name: /altitude
       coefficient: 1.0 # Linear calibration parameters: coefficient
       addition: 0.0 # and addendum
-    orientation_publisher:
-      enabled: true
-      topic_name: /orientation
-    gps_publisher:
-      enabled: false
-      navsat_fix_frame_id: world
-      navsat_fix_topic_name: /gps
-      navsat_altitude_topic_name: /gps_altitude
-      navsat_satellites_topic_name: /gps_satellites
-      navsat_variance_topic_name: /gps_variance
-      ground_speed_topic_name: /gps_ground_speed
-    rtc_publisher:
-      enabled: false
-      topic_name: /witmotion_clock
